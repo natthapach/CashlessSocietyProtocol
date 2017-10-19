@@ -1,6 +1,6 @@
-package messages;
+package tokens;
 
-public class General {
+public class GeneralToken {
     public static final int DEFAULT_PORT = 981;
     public static final String BODY_SEP = "BODY";
     public static final String END_SEP = "END";

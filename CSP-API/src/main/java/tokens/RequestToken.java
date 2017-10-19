@@ -1,6 +1,6 @@
-package messages;
+package tokens;
 
-public class Request {
+public class RequestToken {
 
     public static final class Header {
         public static final String METHOD = "method";

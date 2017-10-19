@@ -1,7 +1,7 @@
 package parser;
 
 import btags.BtagReader;
-import messages.General;
+import tokens.GeneralToken;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,12 +15,12 @@ public class Parser {
         String line = null;
         try {
             while ((line=reader.readLine()) != null){
-                if (General.BODY_SEP.equalsIgnoreCase(line)){
+                if (GeneralToken.BODY_SEP.equalsIgnoreCase(line)){
 
-                }else if (General.END_SEP.equalsIgnoreCase(line)) {
+                }else if (GeneralToken.END_SEP.equalsIgnoreCase(line)) {
 
                 }else{
-                    String[] fields = line.split(General.FIELD_SEP);
+                    String[] fields = line.split(GeneralToken.FIELD_SEP);
                     header.put(fields[0], fields[1]);
                 }
             }
