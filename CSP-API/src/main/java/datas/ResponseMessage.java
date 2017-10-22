@@ -43,6 +43,10 @@ public class ResponseMessage {
         return phrase;
     }
 
+    public String getStatus(){
+        return code + " " + phrase;
+    }
+
     public double getVersion() {
         return version;
     }

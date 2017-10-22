@@ -63,6 +63,7 @@ public class RequestMessage {
     public String getBtagName() {
         return btagName;
     }
+    public String getAgent(){ return agent; }
 
     public String getStringValue(String key){
         return body.getStringValue(key);

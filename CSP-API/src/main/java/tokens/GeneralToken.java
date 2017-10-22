@@ -2,6 +2,7 @@ package tokens;
 
 public class GeneralToken {
     public static final int DEFAULT_PORT = 981;
+    public static final double CURRENT_VERSION = 1.0;
     public static final String BODY_SEP = "BODY";
     public static final String END_SEP = "END";
     public static final String TIME_FORMAT = "dd/MM/yyyy HH.mm.ss z";
