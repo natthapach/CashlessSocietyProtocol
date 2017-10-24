@@ -1,7 +1,5 @@
 package parser;
 
-import btags.BtagReader;
-import com.sun.org.apache.regexp.internal.RE;
 import datas.Body;
 import datas.RequestMessage;
 import datas.ResponseMessage;
@@ -73,7 +71,6 @@ public class Parser {
         Body body = createBody(reader, btag);
         return new RequestMessage(method, version, uid, sid, ts, amt, agent, btag, body);
     }
-
     public ResponseMessage parseToResponse(BufferedReader reader) throws IOException, BadRequestException, BtagNotSupportException, VersionNotSupportException {
         int code = 0;
         String phrase = null;
@@ -120,48 +117,6 @@ public class Parser {
         Body body = createBody(reader, btag);
         return new ResponseMessage(code, phrase, version, uid, ts, btag, body);
     }
-
-    private Body createBody(BufferedReader reader, String btag) throws IOException, BtagNotSupportException, BadRequestException {
-        Body body = null;
-        if (btag == null){
-            String line;
-            while (true) {
-                line = reader.readLine();
-                if (line==null || GeneralToken.END_SEP.equalsIgnoreCase(line))
-                    break;
-            }
-        }else{
-            BtagParser btagParser = btagParsers.get(btag.toUpperCase());
-            if (btagParser == null)
-                throw new BtagNotSupportException();
-            body = btagParser.parseToBody(reader);
-        }
-        return body;
-    }
-
-    private void checkRequestHeader(String method, String uid, String ts, String agent, boolean hasAmt) throws BadRequestException {
-        if (method == null){
-            throw new BadRequestException();
-        }else if (uid == null){
-            throw new BadRequestException();
-        }else if (ts == null){
-            throw new BadRequestException();
-        }else if (agent == null) {
-            throw new BadRequestException();
-        }else if (!hasAmt){
-            throw new BadRequestException();
-        }
-    }
-
-    private void checkResponseHeader(int code, String phrase, String uid, String ts) throws BadRequestException {
-        if (code==0 || phrase == null)
-            throw new BadRequestException();
-        if (uid == null)
-            throw new BadRequestException();
-        if (ts == null)
-            throw new BadRequestException();
-    }
-
     public String parseToString(RequestMessage request) throws BtagNotSupportException {
         String message = "";
         message += (request.getMethod()!=null)?formatField(RequestToken.Header.METHOD, request.getMethod()):"";
@@ -201,11 +156,51 @@ public class Parser {
         message += GeneralToken.END_SEP + "\n";
         return message;
     }
-    private String formatField(String name, String value){
-        return name + GeneralToken.FIELD_SEP + value + "\n";
-    }
     public void regisBtagParser(BtagParser parser){
         btagParsers.put(parser.getBtagName().toUpperCase(), parser);
+    }
+
+    private Body createBody(BufferedReader reader, String btag) throws IOException, BtagNotSupportException, BadRequestException {
+        Body body = null;
+        if (btag == null){
+            String line;
+            while (true) {
+                line = reader.readLine();
+                if (line==null || GeneralToken.END_SEP.equalsIgnoreCase(line))
+                    break;
+            }
+        }else{
+            BtagParser btagParser = btagParsers.get(btag.toUpperCase());
+            if (btagParser == null)
+                throw new BtagNotSupportException();
+            body = btagParser.parseToBody(reader);
+        }
+        return body;
+    }
+
+    private void checkRequestHeader(String method, String uid, String ts, String agent, boolean hasAmt) throws BadRequestException {
+        if (method == null){
+            throw new BadRequestException();
+        }else if (uid == null){
+            throw new BadRequestException();
+        }else if (ts == null){
+            throw new BadRequestException();
+        }else if (agent == null) {
+            throw new BadRequestException();
+        }else if (!hasAmt){
+            throw new BadRequestException();
+        }
+    }
+    private void checkResponseHeader(int code, String phrase, String uid, String ts) throws BadRequestException {
+        if (code==0 || phrase == null)
+            throw new BadRequestException();
+        if (uid == null)
+            throw new BadRequestException();
+        if (ts == null)
+            throw new BadRequestException();
+    }
+    private String formatField(String name, String value){
+        return name + GeneralToken.FIELD_SEP + value + "\n";
     }
 
 }
