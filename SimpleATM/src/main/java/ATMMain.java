@@ -7,8 +7,9 @@ import java.net.Socket;
 /**
  * Created by PC301 on 25/10/2560.
  */
-public class Main {
+public class ATMMain {
     public static void main(String[] args) throws IOException {
+
         String sentence;
         String modifiedSentence;
 //        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
@@ -16,8 +17,12 @@ public class Main {
         DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 //        sentence = inFromUser.readLine();
-        sentence = "asad";
-        outToServer.writeBytes(sentence + '\n');
+        System.out.println("sending...");
+        outToServer.writeBytes("line1" + '\n');
+        outToServer.writeBytes("line1.5" + '\n');
+        modifiedSentence = inFromServer.readLine();
+        System.out.println("FROM SERVER: " + modifiedSentence);
+        outToServer.writeBytes("line2\n");
         modifiedSentence = inFromServer.readLine();
         System.out.println("FROM SERVER: " + modifiedSentence);
         clientSocket.close();
