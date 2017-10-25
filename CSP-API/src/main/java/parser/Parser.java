@@ -72,12 +72,12 @@ public class Parser {
         return new RequestMessage(method, version, uid, sid, ts, amt, agent, btag, body);
     }
     public ResponseMessage parseToResponse(BufferedReader reader) throws IOException, BadRequestException, BtagNotSupportException, VersionNotSupportException {
-        int code = 0;
-        String phrase = null;
+        String status = null;
         double version = 0;
         String uid = null;
         String ts = null;
         String btag = null;
+        double balance = 0;
 
         try{
             String line = null;
@@ -90,13 +90,7 @@ public class Parser {
                     throw new BadRequestException();
                 String[] tokens = line.split(GeneralToken.FIELD_SEP);
                 if (ResponseToken.Header.STATUS.equalsIgnoreCase(tokens[0])){
-                    if (tokens.length>1){
-                        String[] status = tokens[1].split(" ");
-                        if (status.length>1){
-                            code = Integer.parseInt(status[0]);
-                            phrase = status[1];
-                        }
-                    }
+                    status = (tokens.length>1)?tokens[1]:null;
                 }else if (GeneralToken.Header.VERSION.equalsIgnoreCase(tokens[0])) {
                     version = Double.parseDouble((tokens.length > 1) ? tokens[1] : "0");
                     if (version > GeneralToken.CURRENT_VERSION)
@@ -108,14 +102,16 @@ public class Parser {
                     ts = (tokens.length>1)?tokens[1]:null;
                 else if (GeneralToken.Header.BTAG.equalsIgnoreCase(tokens[0]))
                     btag = (tokens.length>1)?tokens[1]:null;
+                else if (ResponseToken.Header.BALANCE.equalsIgnoreCase(tokens[0]))
+                    balance = Double.parseDouble((tokens.length>1)?tokens[1]:"0");
             }
         }catch (NumberFormatException e){
             throw new BadRequestException();
         }
 
-        checkResponseHeader(code, phrase, uid, ts);
+        checkResponseHeader(status, uid, ts);
         Body body = createBody(reader, btag);
-        return new ResponseMessage(code, phrase, version, uid, ts, btag, body);
+        return new ResponseMessage(status, version, uid, ts, btag, balance, body);
     }
     public String parseToString(RequestMessage request) throws BtagNotSupportException {
         String message = "";
@@ -144,6 +140,7 @@ public class Parser {
         message += formatField(GeneralToken.Header.VERSION, response.getVersion() + "");
         message += (response.getUserId()!=null)?formatField(GeneralToken.Header.UID, response.getUserId()):"";
         message += (response.getTimeStamp()!=null)?formatField(GeneralToken.Header.TIME_STAMP, response.getTimeStamp()):"";
+        message += formatField(ResponseToken.Header.BALANCE, response.getBalance() + "");
         message += (response.getBtagName()!=null)?formatField(GeneralToken.Header.BTAG, response.getBtagName()):"";
         message += GeneralToken.BODY_SEP + "\n";
         if (response.getBtagName() != null){
@@ -191,8 +188,8 @@ public class Parser {
             throw new BadRequestException();
         }
     }
-    private void checkResponseHeader(int code, String phrase, String uid, String ts) throws BadRequestException {
-        if (code==0 || phrase == null)
+    private void checkResponseHeader(String status, String uid, String ts) throws BadRequestException {
+        if (status == null)
             throw new BadRequestException();
         if (uid == null)
             throw new BadRequestException();

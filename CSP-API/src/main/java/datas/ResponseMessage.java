@@ -13,14 +13,17 @@ public class ResponseMessage {
     private String uid;
     private String ts;
     private String btagName;
+    private double balance;
     private Body body;
 
-    public ResponseMessage(int code, String phrase, double version, String uid, String ts, String btagName, Body body) {
-        this.code = code;
-        this.phrase = phrase;
+    public ResponseMessage(String status, double version, String uid, String ts, String btagName, double balance, Body body) {
+        String[] token = status.split(" ");
+        this.code = Integer.parseInt(token[0]);
+        this.phrase = token[1];
         this.version = version;
         this.uid = uid;
         this.ts = ts;
+        this.balance = balance;
         this.btagName = btagName;
         this.body = body;
     }
@@ -32,6 +35,7 @@ public class ResponseMessage {
         uid = values.get(GeneralToken.Header.UID);
         ts = values.get(GeneralToken.Header.TIME_STAMP);
         btagName = values.get(GeneralToken.Header.BTAG);
+        balance = Double.parseDouble(values.containsKey(ResponseToken.Header.BALANCE)?values.get(ResponseToken.Header.BALANCE):"0");
         this.body = body;
     }
 
@@ -61,6 +65,10 @@ public class ResponseMessage {
 
     public String getBtagName() {
         return btagName;
+    }
+
+    public double getBalance() {
+        return balance;
     }
 
     public String getStringValue(String key){

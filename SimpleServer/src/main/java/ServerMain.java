@@ -20,21 +20,21 @@ public class ServerMain {
         String capitalizedSentence;
         SQLiteDatabase db = new SQLiteDatabase();
         ServerSocket welcomeSocket = new ServerSocket(6789);
-        try {
-//            db.deposit("5810405185", 0.5);
-            db.withdraw("5810405185", 1);
-            double balance = db.getBalance("5810405185");
-            System.out.println("balance = " + balance);
-        } catch (IdNotFoundException e) {
-            e.printStackTrace();
-        } catch (InsufficientFundException e) {
-            e.printStackTrace();
-        }
-//        while (true) {
-//            System.out.println("Server wait...");
-//            Socket connectionSocket = welcomeSocket.accept();
-//            Thread thread = new Thread(new ReceptionTask(connectionSocket));
-//            thread.start();
+//        try {
+////            db.deposit("5810405185", 0.5);
+//            db.withdraw("5810405185", 1);
+//            double balance = db.getBalance("5810405185");
+//            System.out.println("balance = " + balance);
+//        } catch (IdNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (InsufficientFundException e) {
+//            e.printStackTrace();
 //        }
+        while (true) {
+            System.out.println("Server wait...");
+            Socket connectionSocket = welcomeSocket.accept();
+            Thread thread = new Thread(new ReceptionTask(connectionSocket, db));
+            thread.start();
+        }
     }
 }
