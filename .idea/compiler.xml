@@ -7,11 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="CSP-API" />
+        <module name="SimpleATM" />
+        <module name="SimpleServer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="CashlessSocietyProtocol" target="1.5" />
       <module name="CSP-API" target="1.5" />
+      <module name="SimpleATM" target="1.5" />
+      <module name="SimpleServer" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CSP-API/CSP-API.iml" filepath="$PROJECT_DIR$/CSP-API/CSP-API.iml" />
       <module fileurl="file://$PROJECT_DIR$/CashlessSocietyProtocol.iml" filepath="$PROJECT_DIR$/CashlessSocietyProtocol.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SimpleATM/SimpleATM.iml" filepath="$PROJECT_DIR$/SimpleATM/SimpleATM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SimpleServer/SimpleServer.iml" filepath="$PROJECT_DIR$/SimpleServer/SimpleServer.iml" />
     </modules>
   </component>
 </project>
