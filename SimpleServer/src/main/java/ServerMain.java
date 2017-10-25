@@ -2,6 +2,7 @@ import controller.ReceptionTask;
 import database.SQLiteDatabase;
 import datas.RequestMessage;
 import exceptions.IdNotFoundException;
+import exceptions.InsufficientFundException;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -20,9 +21,13 @@ public class ServerMain {
         SQLiteDatabase db = new SQLiteDatabase();
         ServerSocket welcomeSocket = new ServerSocket(6789);
         try {
+//            db.deposit("5810405185", 0.5);
+            db.withdraw("5810405185", 1);
             double balance = db.getBalance("5810405185");
             System.out.println("balance = " + balance);
         } catch (IdNotFoundException e) {
+            e.printStackTrace();
+        } catch (InsufficientFundException e) {
             e.printStackTrace();
         }
 //        while (true) {
