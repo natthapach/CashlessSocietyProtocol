@@ -89,6 +89,6 @@ public class ReceptionTask implements Runnable {
     }
 
     private void checkBalance(RequestMessage message){
-
+        System.out.println("request to check balance");
     }
 }
