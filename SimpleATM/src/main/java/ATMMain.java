@@ -36,7 +36,7 @@ public class ATMMain {
 //        System.out.println("FROM SERVER: " + modifiedSentence);
 //        clientSocket.close();
         Parser parser = new Parser();
-        RequestMessage requestMessage = new RequestMessage(RequestToken.Method.DEPOSIT, GeneralToken.CURRENT_VERSION, "5810400981", null, "today", 200, "atm", null, null);
+        RequestMessage requestMessage = new RequestMessage(RequestToken.Method.WITHDRAW, GeneralToken.CURRENT_VERSION, "5810400981", null, "today", 200, "atm", null, null);
         try {
             String msg = parser.parseToString(requestMessage);
             System.out.println("---message to server---");

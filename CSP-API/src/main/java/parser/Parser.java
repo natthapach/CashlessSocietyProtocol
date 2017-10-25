@@ -1,5 +1,9 @@
 package parser;
 
+import btags.parser.ShopParser;
+import btags.parser.Status400Parser;
+import btags.parser.Status404Parser;
+import btags.parser.TransportParser;
 import datas.Body;
 import datas.RequestMessage;
 import datas.ResponseMessage;
@@ -17,6 +21,10 @@ import java.util.Map;
 
 public class Parser {
     private Map<String, BtagParser> btagParsers = new HashMap<String, BtagParser>();
+
+    public Parser() {
+        regisBuildInBtagParser();
+    }
 
     public RequestMessage parseToRequest(BufferedReader reader) throws IOException, BadRequestException, BtagNotSupportException, VersionNotSupportException {
         String method = null;
@@ -199,5 +207,10 @@ public class Parser {
     private String formatField(String name, String value){
         return name + GeneralToken.FIELD_SEP + value + "\n";
     }
-
+    private void regisBuildInBtagParser(){
+        regisBtagParser(new ShopParser());
+        regisBtagParser(new TransportParser());
+        regisBtagParser(new Status400Parser());
+        regisBtagParser(new Status404Parser());
+    }
 }

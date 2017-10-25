@@ -3,10 +3,7 @@ package controller;
 import database.AccountManager;
 import datas.RequestMessage;
 import datas.ResponseMessage;
-import exceptions.BadRequestException;
-import exceptions.BtagNotSupportException;
-import exceptions.IdNotFoundException;
-import exceptions.VersionNotSupportException;
+import exceptions.*;
 import parser.Parser;
 import tokens.GeneralToken;
 import tokens.RequestToken;
@@ -58,6 +55,8 @@ public class ReceptionTask implements Runnable {
             e.printStackTrace();
         } catch (IdNotFoundException e) {
             e.printStackTrace();
+        } catch (InsufficientFundException e) {
+            e.printStackTrace();
         }
 
     }
@@ -68,7 +67,7 @@ public class ReceptionTask implements Runnable {
         return requestMessage;
     }
 
-    private void perform(RequestMessage message) throws IdNotFoundException {
+    private void perform(RequestMessage message) throws IdNotFoundException, InsufficientFundException {
             if (RequestToken.Method.DEPOSIT.equalsIgnoreCase(message.getMethod()))
                 deposit(message);
             if (RequestToken.Method.WITHDRAW.equalsIgnoreCase(message.getMethod()))
@@ -79,8 +78,9 @@ public class ReceptionTask implements Runnable {
 
     }
 
-    private void withdraw(RequestMessage message) {
-
+    private void withdraw(RequestMessage message) throws InsufficientFundException, IdNotFoundException {
+        System.out.println("request to withdraw");
+        accountManager.withdraw(message.getUserId(), message.getAmount());
     }
 
     private void deposit(RequestMessage message) throws IdNotFoundException {
