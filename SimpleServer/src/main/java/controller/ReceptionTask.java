@@ -1,5 +1,7 @@
 package controller;
 
+import btags.body.Status404;
+import btags.parser.Status404Parser;
 import database.AccountManager;
 import datas.RequestMessage;
 import datas.ResponseMessage;
@@ -54,9 +56,36 @@ public class ReceptionTask implements Runnable {
         } catch (VersionNotSupportException e) {
             e.printStackTrace();
         } catch (IdNotFoundException e) {
-            e.printStackTrace();
+            try {
+                DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+                Status404 body = new Status404(e.getMissings());
+                ResponseMessage responseMessage = new ResponseMessage(ResponseToken.Status.S404,
+                                                                        GeneralToken.CURRENT_VERSION,
+                                                                        e.getUid(), e.getTs(), Status404Parser.BTAG_NAME, 0, body);
+                String response = parser.parseToString(responseMessage);
+                System.out.println("--message to client--");
+                System.out.println(response);
+                outToClient.writeBytes(response);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (BtagNotSupportException e1) {
+                e1.printStackTrace();
+            }
         } catch (InsufficientFundException e) {
-            e.printStackTrace();
+            try {
+                DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+                ResponseMessage responseMessage = new ResponseMessage(ResponseToken.Status.S418,
+                        GeneralToken.CURRENT_VERSION,
+                        e.getUid(), e.getTs(), null, 0, null);
+                String response = parser.parseToString(responseMessage);
+                System.out.println("--message to client--");
+                System.out.println(response);
+                outToClient.writeBytes(response);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (BtagNotSupportException e1) {
+                e1.printStackTrace();
+            }
         }
 
     }
@@ -74,18 +103,59 @@ public class ReceptionTask implements Runnable {
                 withdraw(message);
             if (RequestToken.Method.BALANCE.equalsIgnoreCase(message.getMethod()))
                 checkBalance(message);
+            if (RequestToken.Method.TRANSFER.equalsIgnoreCase(message.getMethod()))
+                transfer(message);
 //            System.out.println("balance = " + accountManager.getBalance(message.getUserId()));
 
     }
+    private void transfer(RequestMessage message) throws InsufficientFundException, IdNotFoundException {
+        System.out.println("request to transfer");
+        try {
+            accountManager.withdraw(message.getUserId(), message.getAmount());
+        } catch (IdNotFoundException e) {
+            e.setUid(message.getUserId());
+            e.setTs(message.getTimeStamp());
+            throw e;
+        } catch (InsufficientFundException e){
+            e.setUid(message.getUserId());
+            e.setTs(message.getTimeStamp());
+            throw e;
+        }
 
+        try {
+            accountManager.deposit(message.getServiceId(), message.getAmount());
+        } catch (IdNotFoundException e) {
+            System.err.println("Transfer target not found!");
+            accountManager.deposit(message.getUserId(), message.getAmount());
+            e.setUid(message.getServiceId());
+            e.setTs(message.getTimeStamp());
+            throw e;
+        }
+    }
     private void withdraw(RequestMessage message) throws InsufficientFundException, IdNotFoundException {
-        System.out.println("request to withdraw");
-        accountManager.withdraw(message.getUserId(), message.getAmount());
+        try {
+            System.out.println("request to withdraw");
+            accountManager.withdraw(message.getUserId(), message.getAmount());
+        }  catch (IdNotFoundException e) {
+            e.setUid(message.getUserId());
+            e.setTs(message.getTimeStamp());
+            throw e;
+        } catch (InsufficientFundException e){
+            e.setUid(message.getUserId());
+            e.setTs(message.getTimeStamp());
+            throw e;
+        }
     }
 
     private void deposit(RequestMessage message) throws IdNotFoundException {
-        System.out.println("request to deposit");
-        accountManager.deposit(message.getUserId(), message.getAmount());
+        try {
+            System.out.println("request to deposit");
+            accountManager.deposit(message.getUserId(), message.getAmount());
+        } catch (IdNotFoundException e) {
+            e.setUid(message.getUserId());
+            e.setTs(message.getTimeStamp());
+            throw e;
+        }
     }
 
     private void checkBalance(RequestMessage message){

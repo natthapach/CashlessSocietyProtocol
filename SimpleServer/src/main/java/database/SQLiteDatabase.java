@@ -22,8 +22,11 @@ public class SQLiteDatabase implements AccountManager {
                                             "where id=%s", uid, amt, uid);
                 Statement statement = conn.createStatement();
                 int result = statement.executeUpdate(sql);
-                if (result == 0)
-                    throw new IdNotFoundException();
+                if (result == 0) {
+                    IdNotFoundException e = new IdNotFoundException();
+                    e.addMissing(uid);
+                    throw e;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,8 +54,11 @@ public class SQLiteDatabase implements AccountManager {
                         "where id=%s", uid, amt, uid);
                 Statement statement = conn.createStatement();
                 int result = statement.executeUpdate(sql);
-                if (result == 0)
-                    throw new IdNotFoundException();
+                if (result == 0) {
+                    IdNotFoundException e = new IdNotFoundException();
+                    e.addMissing(uid);
+                    throw e;
+                }
             }
 
         } catch (SQLException e) {
@@ -76,7 +82,10 @@ public class SQLiteDatabase implements AccountManager {
                 ResultSet resultSet = statement.executeQuery(sql);
                 if (resultSet.next())
                     return resultSet.getDouble("balance");
-                throw new IdNotFoundException();
+
+                IdNotFoundException e = new IdNotFoundException();
+                e.addMissing(uid);
+                throw e;
             }
         } catch (SQLException e) {
             e.printStackTrace();
