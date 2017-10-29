@@ -30,37 +30,37 @@
   การตั้งชื่อ rule จะต้องขึ้นต้นด้วยตัวอักษรและตามด้วยลำดับของอักษร, ตัวเลข หรือเครื่องหมายยัติภังค์ (-) และ rule name เป็น case-insensitive
 #### Rule Form
     name = element crlf
-   ใช้สำหรับการนิยาม rule โดยที่ <name> คือชื่อของ rule, <elements> คือ rule หรือ terminal และ <crlf> คือ carriage return ตามด้วย line feed
+  ใช้สำหรับการนิยาม rule โดยที่ <name> คือชื่อของ rule, <elements> คือ rule หรือ terminal และ <crlf> คือ carriage return ตามด้วย line feed
 #### Terminal Values
      name = % base code
- 	ใช้สำหรับนิยาม terminal โดยที่ <name> คือชื่อของ terminal. <base> คือฐานของเลข code และ <code> คือตัวเลขแทนตัวอักษรใน ASCII
+  ใช้สำหรับนิยาม terminal โดยที่ <name> คือชื่อของ terminal. <base> คือฐานของเลข code และ <code> คือตัวเลขแทนตัวอักษรใน ASCII
 #### Terminal Concatenation
- % base code1.code2
- 	ใช้สำหรับการรวม code เช่น %d13 %d10 สามารถแทนด้วย %13.10
+      % base code1.code2
+  ใช้สำหรับการรวม code เช่น %d13 %d10 สามารถแทนด้วย %13.10
 #### Concatenation
-element1 element2
- 	ใช้สำหรับการรวม element
+      element1 element2
+  ใช้สำหรับการรวม element
 #### Literal
-"text"
- 	ใช้สำหรับการระบุ string แบบ case-insensitive
+      "text"
+  ใช้สำหรับการระบุ string แบบ case-insensitive
 #### Alternative
-element1 / element2
- 	ใช้สำหรับสร้างทางเลือก เช่น foo / bar หมายถึง <foo> หรือ <bar>
+      element1 / element2
+  ใช้สำหรับสร้างทางเลือก เช่น foo / bar หมายถึง <foo> หรือ <bar>
 #### Sequence Group
-(element1 element2)
- 	ใช้สำหรับจัดกลุ่มของ element
+      (element1 element2)
+  ใช้สำหรับจัดกลุ่มของ element
 #### Variable Repetition
-<a>*<b>element
- 	ใช้สำหรับการซ้ำ element อย่างน้อย a จนถึงอย่างมาก b เช่น 1*2<element> โดยค่าพื้นฐานของ a=0 และ b=infinity
+       <a>*<b>element
+  ใช้สำหรับการซ้ำ element อย่างน้อย a จนถึงอย่างมาก b เช่น 1*2<element> โดยค่าพื้นฐานของ a=0 และ b=infinity
 #### Specific Repetition
-<n>element
- 	ใช้สำหรับการซ้ำ element จำนวน n
+        <n>element
+  ใช้สำหรับการซ้ำ element จำนวน n
 #### Optional Sequence
-[element]
- 	ใช้สำหรับระบุว่า element นี้เป็นตัวเลือก สามารถไม่ใส่ได้
+        [element]
+  ใช้สำหรับระบุว่า element นี้เป็นตัวเลือก สามารถไม่ใส่ได้
 #### Comment
-; comment
- 	ใช้สำหรับเขียน comment
+        ; comment
+  ใช้สำหรับเขียน comment
 ### Core Rule
  	rule ต่อไปนี้เป็น rule ที่จะใช้ตลอดเอกสารนี้เพื่อใช้ในการอธิบายโครงสร้างต่างๆ
 ALPHA	=	%x41-5A / %x61-7A   ; A-Z / a-z
