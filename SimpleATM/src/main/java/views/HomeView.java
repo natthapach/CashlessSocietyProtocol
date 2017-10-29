@@ -2,6 +2,7 @@ package views;
 
 import controllers.CoreController;
 import controllers.StageController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -34,4 +35,5 @@ public class HomeView {
         controller.setAccount(accountTextField.getText());
         controller.changeToTransferScene();
     }
+
 }

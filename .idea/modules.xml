@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/CashlessSocietyProtocol.iml" filepath="$PROJECT_DIR$/CashlessSocietyProtocol.iml" />
       <module fileurl="file://$PROJECT_DIR$/SimpleATM/SimpleATM.iml" filepath="$PROJECT_DIR$/SimpleATM/SimpleATM.iml" />
       <module fileurl="file://$PROJECT_DIR$/SimpleServer/SimpleServer.iml" filepath="$PROJECT_DIR$/SimpleServer/SimpleServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SimpleTransport/SimpleTransport.iml" filepath="$PROJECT_DIR$/SimpleTransport/SimpleTransport.iml" />
     </modules>
   </component>
 </project>

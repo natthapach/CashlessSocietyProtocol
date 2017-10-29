@@ -105,9 +105,27 @@ public class ReceptionTask implements Runnable {
                 checkBalance(message);
             if (RequestToken.Method.TRANSFER.equalsIgnoreCase(message.getMethod()))
                 transfer(message);
+            if (RequestToken.Method.PAY.equalsIgnoreCase(message.getMethod()))
+                pay(message);
 //            System.out.println("balance = " + accountManager.getBalance(message.getUserId()));
 
     }
+
+    private void pay(RequestMessage message) throws InsufficientFundException, IdNotFoundException {
+        try {
+            System.out.println("request to pay");
+            accountManager.withdraw(message.getUserId(), message.getAmount());
+        }  catch (IdNotFoundException e) {
+            e.setUid(message.getUserId());
+            e.setTs(message.getTimeStamp());
+            throw e;
+        } catch (InsufficientFundException e){
+            e.setUid(message.getUserId());
+            e.setTs(message.getTimeStamp());
+            throw e;
+        }
+    }
+
     private void transfer(RequestMessage message) throws InsufficientFundException, IdNotFoundException {
         System.out.println("request to transfer");
         try {

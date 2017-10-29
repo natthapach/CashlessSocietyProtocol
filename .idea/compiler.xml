@@ -9,6 +9,7 @@
         <module name="CSP-API" />
         <module name="SimpleATM" />
         <module name="SimpleServer" />
+        <module name="SimpleTransport" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -16,6 +17,7 @@
       <module name="CSP-API" target="1.5" />
       <module name="SimpleATM" target="1.5" />
       <module name="SimpleServer" target="1.5" />
+      <module name="SimpleTransport" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -199,10 +199,10 @@ public class Parser {
     private void checkResponseHeader(String status, String uid, String ts) throws BadRequestException {
         if (status == null)
             throw new BadRequestException();
-        if (uid == null)
-            throw new BadRequestException();
-        if (ts == null)
-            throw new BadRequestException();
+//        if (uid == null)
+//            throw new BadRequestException();
+//        if (ts == null)
+//            throw new BadRequestException();
     }
     private String formatField(String name, String value){
         return name + GeneralToken.FIELD_SEP + value + "\n";

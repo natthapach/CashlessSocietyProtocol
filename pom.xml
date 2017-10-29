@@ -12,6 +12,7 @@
         <module>CSP-API</module>
         <module>SimpleServer</module>
         <module>SimpleATM</module>
+        <module>SimpleTransport</module>
     </modules>
 
 

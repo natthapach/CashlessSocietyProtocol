@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.StationView">
+    <top>
+        <FlowPane alignment="CENTER" prefHeight="56.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="441.0" text="Simple Transport Train">
+                    <font>
+                        <Font size="28.0" />
+                    </font>
+                </Label>
+            </children>
+        </FlowPane>
+    </top>
+    <center>
+        <FlowPane alignment="TOP_CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="236.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <FlowPane alignment="CENTER" prefHeight="79.0" prefWidth="367.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="73.0" text="Balance" />
+                  <TextField fx:id="balanceTextField" editable="false" />
+               </children>
+            </FlowPane>
+            <FlowPane prefHeight="61.0" prefWidth="367.0">
+               <children>
+                  <FlowPane orientation="VERTICAL" prefHeight="61.0" prefWidth="187.0">
+                     <children>
+                        <Label text="Source" />
+                        <ChoiceBox onAction="#onSelectStation" fx:id="sourceChoiceBox" prefWidth="150.0" />
+                     </children>
+                  </FlowPane>
+                  <FlowPane orientation="VERTICAL" prefHeight="61.0" prefWidth="167.0">
+                     <children>
+                        <Label text="Destination" />
+                        <ChoiceBox onAction="#onSelectStation" fx:id="destinationChoiceBox" prefWidth="150.0" />
+                     </children>
+                  </FlowPane>
+               </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER" prefHeight="86.0" prefWidth="367.0">
+               <children>
+                  <FlowPane alignment="CENTER" prefHeight="42.0" prefWidth="355.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="47.0" text="Price" />
+                        <TextField fx:id="priceTextField" text="0" editable="false" />
+                     </children>
+                  </FlowPane>
+                  <Button mnemonicParsing="false" onAction="#onClickOK" text="OK" />
+               </children>
+            </FlowPane>
+         </children>
+        </FlowPane>
+    </center>
+    <bottom>
+        <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="79.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button onAction="#onClickBack" mnemonicParsing="false" text="Back" />
+         </children></FlowPane>
+    </bottom>
+   <left>
+      <FlowPane prefHeight="256.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <FlowPane prefHeight="256.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>
