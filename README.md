@@ -62,20 +62,20 @@
         ; comment
   ใช้สำหรับเขียน comment
 ### Core Rule
- 	rule ต่อไปนี้เป็น rule ที่จะใช้ตลอดเอกสารนี้เพื่อใช้ในการอธิบายโครงสร้างต่างๆ
-ALPHA	=	%x41-5A / %x61-7A   ; A-Z / a-z
-BIT		=	"0" / "1"
-CHAR	=	%x01-7F	; any 7-bit US-ASCII character, excluding NUL
-CR		=	%x0D		; carriage return
-CRLF	=	CR LF		; Internet standard newline
-DIGIT	=	%x30-39	; 0-9
-DQUOTE	=	%x22		; " (Double Quote)
-HEXDIG	=	DIGIT / "A" / "B" / "C" / "D" / "E" / "F"
-HTAB	= 	%x09		; horizontal tab
-LF		=  	%x0A 		; linefeed
-SP		=	%x20
-VCHAR	=	%x21-7E	; visible (printing) characters
-ALNUM	=	ALPHA / DIGIT
+rule ต่อไปนี้เป็น rule ที่จะใช้ตลอดเอกสารนี้เพื่อใช้ในการอธิบายโครงสร้างต่างๆ
+  - ALPHA	=	%x41-5A / %x61-7A   ; A-Z / a-z
+  - BIT		=	"0" / "1"
+  - CHAR	=	%x01-7F	; any 7-bit US-ASCII character, excluding NUL
+  - CR		=	%x0D		; carriage return
+  - CRLF	=	CR LF		; Internet standard newline
+  - DIGIT	=	%x30-39	; 0-9
+  - DQUOTE	=	%x22		; " (Double Quote)
+  - HEXDIG	=	DIGIT / "A" / "B" / "C" / "D" / "E" / "F"
+  - HTAB	= 	%x09		; horizontal tab
+  - LF		=  	%x0A 		; linefeed
+  - SP		=	%x20
+  - VCHAR	=	%x21-7E	; visible (printing) characters
+  - ALNUM	=	ALPHA / DIGIT
  
 ## CSP Message
 ### Message Type
