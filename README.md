@@ -18,20 +18,21 @@
   Message ที่ส่งโดย server เพื่อตอบผลลัพธ์จากธุรกรรม
 #### Transaction (ธุรกรรม)
   กิจกรรมทางการเงิน
-### Overall Operation (ภาพรวมการทำงาน)	
+### Overall Operation (ภาพรวมการทำงาน)
   CSP protocol ทำงานโดยการที่ client จะส่ง request message ไปยัง server จากนั้น server จะประมวลผล message ที่ส่งไป เพื่อดำเนินธุรกรรม และตอบกลับผลของธุรกรรมนั้นกลับไปยัง client ด้วย response message โดยใน 1 connection จะมีเพียง 1 request และ 1 response เท่านั้น	
- 	โดยทั่วไป CSP จะทำงานบน TCP/IP connection และ default port คือ TCP 981
+  
+  โดยทั่วไป CSP จะทำงานบน TCP/IP connection และ default port คือ TCP 981
  
 ## Notational Conventions and Generic Grammar  
 ### Augmented BNF
- 	คำอธิบายภายในเอกสารนี้ จะอธิบายด้วยบทบรรยายและ Augmented BNF ตามที่ระบุใน RFC 5234 โดยโครงสร้างของ augmented BNF มีดังนี้
+  คำอธิบายภายในเอกสารนี้ จะอธิบายด้วยบทบรรยายและ Augmented BNF ตามที่ระบุใน RFC 5234 โดยโครงสร้างของ augmented BNF มีดังนี้
 #### Rule Naming
- 	การตั้งชื่อ rule จะต้องขึ้นต้นด้วยตัวอักษรและตามด้วยลำดับของอักษร, ตัวเลข หรือเครื่องหมายยัติภังค์ (-) และ rule name เป็น case-insensitive
+  การตั้งชื่อ rule จะต้องขึ้นต้นด้วยตัวอักษรและตามด้วยลำดับของอักษร, ตัวเลข หรือเครื่องหมายยัติภังค์ (-) และ rule name เป็น case-insensitive
 #### Rule Form
-name = element crlf
- 	ใช้สำหรับการนิยาม rule โดยที่ <name> คือชื่อของ rule, <elements> คือ rule หรือ terminal และ <crlf> คือ carriage return ตามด้วย line feed
+    name = element crlf
+   ใช้สำหรับการนิยาม rule โดยที่ <name> คือชื่อของ rule, <elements> คือ rule หรือ terminal และ <crlf> คือ carriage return ตามด้วย line feed
 #### Terminal Values
-name = % base code
+     name = % base code
  	ใช้สำหรับนิยาม terminal โดยที่ <name> คือชื่อของ terminal. <base> คือฐานของเลข code และ <code> คือตัวเลขแทนตัวอักษรใน ASCII
 #### Terminal Concatenation
  % base code1.code2
