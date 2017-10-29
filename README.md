@@ -33,7 +33,7 @@
   ใช้สำหรับการนิยาม rule โดยที่ <name> คือชื่อของ rule, <elements> คือ rule หรือ terminal และ <crlf> คือ carriage return ตามด้วย line feed
 #### Terminal Values
      name = % base code
-  ใช้สำหรับนิยาม terminal โดยที่ <name> คือชื่อของ terminal. <base> คือฐานของเลข code และ <code> คือตัวเลขแทนตัวอักษรใน ASCII
+  ใช้สำหรับนิยาม terminal โดยที่ <name> คือชื่อของ terminal. <base> คือฐานของเลข code และ /<code/> คือตัวเลขแทนตัวอักษรใน ASCII
 #### Terminal Concatenation
       % base code1.code2
   ใช้สำหรับการรวม code เช่น %d13 %d10 สามารถแทนด้วย %13.10
@@ -79,15 +79,17 @@ rule ต่อไปนี้เป็น rule ที่จะใช้ตลอ
  
 ## CSP Message
 ### Message Type
- 	CSP message ประกอบด้วย request-message (section 4) จาก client และ response-message (section 5) จาก server
- 	 		CSP-message = request / response
- 	ทั้ง request-message และ response-message มีรูปแบบที่เหมือนกันเรียกว่า generic-message โดยจะขึ้นต้น message ด้วย start-line ตามด้วยส่วนของ message-header และ message-body โดยมี body-sep เพื่อกั้นระหว่างส่วน header และ body และ end-sep เพื่อระบุจุดจบของ message
- 	แม้ว่า request-message และ response-message จะมีรูปแบบที่เหมือนกัน แต่รายละเอียดของ start-line นั้นต่างกัน อีกทั้งข้อมูลใน message-header ก็ต่างกันอีกด้วย
- 			generic-message = 	start-line CRLF
- 						*(message-header CRLF) 	; section 3.2
- 						body-sep CRLF
- 						[*(message-body CRLF)]	; section 3.3
- 						end-sep CRLF
+  CSP message ประกอบด้วย request-message (section 4) จาก client และ response-message (section 5) จาก server
+      CSP-message = request / response
+  ทั้ง request-message และ response-message มีรูปแบบที่เหมือนกันเรียกว่า generic-message โดยจะขึ้นต้น message ด้วย start-line ตามด้วยส่วนของ message-header และ message-body โดยมี body-sep เพื่อกั้นระหว่างส่วน header และ body และ end-sep เพื่อระบุจุดจบของ message
+  
+  แม้ว่า request-message และ response-message จะมีรูปแบบที่เหมือนกัน แต่รายละเอียดของ start-line นั้นต่างกัน อีกทั้งข้อมูลใน message-header ก็ต่างกันอีกด้วย
+        generic-message = 	start-line CRLF
+ 						              *(message-header CRLF) 	; section 3.2
+ 						              body-sep CRLF
+ 						              [*(message-body CRLF)]	; section 3.3
+ 						              end-sep CRLF
+                         
  	 		start-line 	=	request-line / 		; section 4.1
  						status-line 		; section 5.1
  			body-sep 	= 	"BODY"
