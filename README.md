@@ -3,6 +3,7 @@
 ## Introduction
 ### Purpose (วัตถุประสงค์)	
   Cashless Society Protocol (CSP) เป็น application-level protocol สร้างขึ้นเพื่อใช้ในการส่งข้อมูลทางการเงิน ภายในระบบการใช้จ่ายโดยไม่ผ่านเงินสด ตามแนวคิดสังคมไร้เงินสด (Cashless Society)
+  
   โดย CSP นั้นถูกออกแบบมาให้ส่งเฉพาะข้อมูลในส่วนของธุรกรรมทางการเงิน โดยไม่ได้ครอบคลุมถึงระบบระบุตัวตน (เช่น ระบบ login), ระบบการจัดการฐานข้อมูล (เช่น การเรียกข้อมูลราคาสินค้าจาก server) หากต้องการทำระบบดังกล่าวควรใช้ร่วมกับ protocol อื่น เช่น HTTP
 ### Terminology (นิยามศัพท์)
 #### Message
@@ -10,15 +11,15 @@
 #### Client
  Program ผู้ส่ง message เพื่อขอดำเนินธุรกรรม
 #### Server
- 	Program ผู้รับ message เพื่อดำเนินธุรกรรมตาม message ที่ได้รับ และตอบกลับผลลัพธ์จากการทำธุรกรรมนั้น
+  Program ผู้รับ message เพื่อดำเนินธุรกรรมตาม message ที่ได้รับ และตอบกลับผลลัพธ์จากการทำธุรกรรมนั้น
 #### Request
- 	Message ที่ส่งโดย client เพื่อขอดำเนินธุรกรรม
+  Message ที่ส่งโดย client เพื่อขอดำเนินธุรกรรม
 #### Response
- 	Message ที่ส่งโดย server เพื่อตอบผลลัพธ์จากธุรกรรม
+  Message ที่ส่งโดย server เพื่อตอบผลลัพธ์จากธุรกรรม
 #### Transaction (ธุรกรรม)
- 	กิจกรรมทางการเงิน
+  กิจกรรมทางการเงิน
 ### Overall Operation (ภาพรวมการทำงาน)	
- 	CSP protocol ทำงานโดยการที่ client จะส่ง request message ไปยัง server จากนั้น server จะประมวลผล message ที่ส่งไป เพื่อดำเนินธุรกรรม และตอบกลับผลของธุรกรรมนั้นกลับไปยัง client ด้วย response message โดยใน 1 connection จะมีเพียง 1 request และ 1 response เท่านั้น	
+  CSP protocol ทำงานโดยการที่ client จะส่ง request message ไปยัง server จากนั้น server จะประมวลผล message ที่ส่งไป เพื่อดำเนินธุรกรรม และตอบกลับผลของธุรกรรมนั้นกลับไปยัง client ด้วย response message โดยใน 1 connection จะมีเพียง 1 request และ 1 response เท่านั้น	
  	โดยทั่วไป CSP จะทำงานบน TCP/IP connection และ default port คือ TCP 981
  
 ## Notational Conventions and Generic Grammar  
